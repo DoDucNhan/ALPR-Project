@@ -24,7 +24,7 @@ def cleanup_text(text):
 # langs = args["langs"].split(",")
 print("[INFO] OCR'ing with the following languages: {}".format("en"))
 # load the input image from disk
-image = cv2.imread("plates/3.jpg")
+image = cv2.imread("plates/0.jpg")
 # OCR the input image using EasyOCR
 print("[INFO] OCR'ing input image...")
 reader = Reader(['en'])
