@@ -22,6 +22,10 @@ python main.py -i test\0.jpg -d detection\wpod-net.json -e enhancement\models\ED
 - `-d`: path to detection model. This project uses WPOD-Net for license plate detection. The detailed model architecture is presented [here](https://paperswithcode.com/paper/license-plate-detection-and-recognition-in)
 - `-e`: path to enhance resolution model. There are 3 different models to enhance the resolution of the LP-region detected, this might change the performace with corresponding input image.
 
+## Disadvantages
+- Couldn't detect some square license plates.
+- Text recognition performance affected by brightness and blur.
+
 ## References
 1. Detection phase:
 - https://www.miai.vn/2019/11/20/nhan-dien-bien-so-xe-chuong-2-phat-hien-bien-so-xe-bang-pretrain-wpod-net/
