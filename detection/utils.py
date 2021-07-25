@@ -199,7 +199,7 @@ def reconstruct(norm_image, img_resized, predict_value, lp_threshold):
 
     # LP size and type
     out_size, lp_type = (two_lines, 2) if (
-                (final_labels_frontal[0].wh()[0] / final_labels_frontal[0].wh()[1]) < 1.7) else (one_line, 1)
+            (final_labels_frontal[0].wh()[0] / final_labels_frontal[0].wh()[1]) < 1.7) else (one_line, 1)
 
     TLp = []
     if len(final_labels):

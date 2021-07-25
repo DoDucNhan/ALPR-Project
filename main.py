@@ -34,7 +34,7 @@ dim = (width, height)
 # resize image
 resized = cv2.resize(lpImage, dim, interpolation=cv2.INTER_AREA)
 enhance_img = enhancement_process(resized, args["enhance"])
-cv2.imshow("Enhance LP image", enhance_img)
+# cv2.imshow("Enhance LP image", enhance_img)
 
 # text recognition
 plate_number = recognition_process(enhance_img)
