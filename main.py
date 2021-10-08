@@ -1,6 +1,5 @@
 from detection.LP_detection import detection_process
 from recognition.text_recognition import recognition_process
-from enhancement.super_res_image import enhancement_process
 import argparse
 import cv2
 
