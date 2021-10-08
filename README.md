@@ -16,21 +16,21 @@ pip install -r requirements.txt
 ## Run project
 Run the following command.
 ```
-python main.py -i test\0.jpg -d detection\wpod-net.json -e enhancement\models\EDSR_x4.pb
+python main.py -i test\0.jpg -d yolo
 ```
 - `-i`: path to input image to be LP-detected.
-- `-d`: path to detection model. This project uses WPOD-Net for license plate detection. The detailed model architecture is presented [here](https://paperswithcode.com/paper/license-plate-detection-and-recognition-in)
-- `-e`: path to enhance resolution model. There are 3 different models to enhance the resolution of the LP-region detected, this might change the performace with corresponding input image.
+- `-d`: detection model (wpod or yolo). This project uses WPOD-Net as default model for license plate detection. The detailed model architecture is presented [here](https://paperswithcode.com/paper/license-plate-detection-and-recognition-in)
+
+## YOLOv4 detection model 
+Although WPOD-Net is very good at detecting LPs and transform them to a direct viewpoint, its performance on square license plates is still limited. Therefore, I add a custom YOLOv4 tiny pretrained model for square license plates only. You can take a look at my [colab notebook](https://colab.research.google.com/drive/1L2E8j45KTyyv0PcF-3hI08ZzWFtAn_lf) or step-by-step tutorial here: https://nttuan8.com/bai-toan-phat-hien-bien-so-xe-may-viet-nam/
 
 ## Disadvantages
-- Couldn't detect some square license plates.
-- Text recognition performance affected by brightness and blur.
+- WPOD-Net couldn't detect some square license plates.
+- Text recognition performance affected by brightness, blur, and perspective of license plate.
 
 ## References
 1. Detection phase:
 - https://www.miai.vn/2019/11/20/nhan-dien-bien-so-xe-chuong-2-phat-hien-bien-so-xe-bang-pretrain-wpod-net/
 - https://medium.com/@quangnhatnguyenle/detect-and-recognize-vehicles-license-plate-with-machine-learning-and-python-part-1-detection-795fda47e922
-2. Enhanace resolution phase:
-- https://www.pyimagesearch.com/2020/11/09/opencv-super-resolution-with-deep-learning/
-3. Text recognition phase:
+2. Text recognition phase:
 - https://www.pyimagesearch.com/2020/09/14/getting-started-with-easyocr-for-optical-character-recognition/
