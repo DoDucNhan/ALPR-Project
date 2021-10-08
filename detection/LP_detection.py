@@ -1,10 +1,11 @@
 import cv2
+import numpy as np
 from detection.utils import load_model, detect_lp, im2single
 
 
-def detection_process(img, model_path):
+def wpod_net(img):
     # load model
-    model = load_model(model_path)
+    model = load_model("detection\\wpod-net.json")
     # Max and min of image dimension
     d_max = 608
     d_min = 288
@@ -18,29 +19,29 @@ def detection_process(img, model_path):
 
     if len(lpImg):
         # Show the first license detected (change to predict multiple licences)
-        return cv2.cvtColor(lpImg[0], cv2.COLOR_RGB2BGR)
+        # change type to uint8
+        lpImage = cv2.cvtColor(lpImg[0], cv2.COLOR_RGB2BGR)
+        lpImage = (lpImage * 255).astype(np.uint8)
+        return lpImage
 
 
-if __name__ == "__main__":
-    # Image path
-    img_path = "test/3.jpg"
-    save_path = "plates/3.jpg"
-    # Read input image
-    img_org = cv2.imread(img_path)
-    cv2.imshow("Origin", img_org)
-    scale = 0.5
-    w = int(img_org.shape[1] * scale)
-    h = int(img_org.shape[0] * scale)
-    dim = (w, h)
-    # resize image
-    resized = cv2.resize(img_org, dim, interpolation=cv2.INTER_AREA)
+def yolo_v4(img):
+    net = cv2.dnn_DetectionModel("detection\\yolo-tinyv4-obj.cfg", "detection\\yolo-tinyv4-obj_best.weights")
+    net.setInputParams(size=(416, 416), scale=1 / 255, swapRB=True)
 
-    # Load WPOD model LP detection
-    wpod_net_path = "wpod-net.json"
-    wpod_net = load_model(wpod_net_path)
+    _, confidence, box = net.detect(img, confThreshold=0.2, nmsThreshold=0.4)
+    left, top, width, height = box[0]
+    lpImg = img[top:top + height, left:left + width]
+    return lpImg
 
-    plate_img = detection_process(resized, wpod_net)
-    cv2.imshow("Plate", plate_img)
-    cv2.waitKey()
-    # cv2.imwrite(save_path, cv2.cvtColor(plate_img, cv2.COLOR_BGR2RGB)*255)
+
+def detection_process(img, model):
+    if model == "wpod":
+        return wpod_net(img)
+    elif model == "yolo":
+        return yolo_v4(img)
+    else:
+        return img
+
+
 
