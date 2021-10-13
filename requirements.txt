@@ -1,4 +1,4 @@
 opencv-contrib-python
 imutils
 easyocr
-tensorflow
+keras
