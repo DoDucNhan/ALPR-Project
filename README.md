@@ -1,6 +1,6 @@
 # ALPR-Project
 
- This is an **ALPR (Auto License Plate Recognition)** project for both *rectangle* and *square* license plates.
+ This is an **ALPR (Auto License Plate Recognition)** project for both *rectangle* and *square* license plates using **WPOD-Net, YOLOv4 and EasyOCR**.
 
 ## Setups
 1. Clone the repository:
